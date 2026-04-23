@@ -10,3 +10,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+Route::get('/certificates', function () {
+    return view('certificates.index');
+});
+
+Route::get('/certificates/create', function () {
+    return view('certificates.create');
+});
