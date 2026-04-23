@@ -26,3 +26,23 @@ Route::get('/incidents', function () {
 Route::get('/incidents/create', function () {
     return view('incidents.create');
 });
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/admin/certificates', function () {
+    return view('admin.certificates.index');
+});
+
+Route::get('/admin/incidents', function () {
+    return view('admin.incidents.index');
+}); 
+
+Route::get('/admin/events', function () {
+    return view('admin.events.index');
+});
+
+Route::get('/admin/residents', function () {
+    return view('admin.residents.index');
+});
