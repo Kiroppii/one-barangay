@@ -18,3 +18,11 @@ Route::get('/certificates', function () {
 Route::get('/certificates/create', function () {
     return view('certificates.create');
 });
+
+Route::get('/incidents', function () {
+    return view('incidents.index');
+});
+
+Route::get('/incidents/create', function () {
+    return view('incidents.create');
+});
