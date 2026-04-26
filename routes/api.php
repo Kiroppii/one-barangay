@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 
 // PUBLIC ROUTE: Anyone can try to log in
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 // PROTECTED ROUTES: You MUST have a valid Sanctum token to access these
 Route::middleware('auth:sanctum')->group(function () {
