@@ -3,9 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
-
 // Add our new frontend dashboard route
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -45,4 +44,16 @@ Route::get('/admin/events', function () {
 
 Route::get('/admin/residents', function () {
     return view('admin.residents.index');
+});
+
+Route::get('/admin/residents/create', function () {
+    return view('admin.residents.create');
+});
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+Route::get('/register', function () {
+    return view('auth.register');
 });

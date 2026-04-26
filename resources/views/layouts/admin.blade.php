@@ -55,28 +55,47 @@
 
     <div class="flex-1 flex flex-col h-screen overflow-hidden">
         
-        <header class="h-20 card-bg flex items-center justify-between px-8 z-10 border-b-0 border-l-0 shrink-0">
+        <header class="h-20 card-bg flex items-center justify-between px-8 z-[60] border-b-0 border-l-0 shrink-0 relative">
             <div class="relative w-96">
                 <svg class="w-5 h-5 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <input type="text" placeholder="Search residents, certificates, blotters..." class="w-full bg-[#020617] border border-blue-900/50 rounded-full pl-10 pr-4 py-2 text-sm text-slate-300 focus:outline-none focus:border-blue-500 transition-colors">
             </div>
-            <div class="flex items-center gap-6">
+            
+            <div class="flex items-center gap-6 h-full">
                 <button class="text-slate-400 hover:text-blue-400 transition-colors relative">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                     <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
                 </button>
-                <div class="flex items-center gap-3 pl-6 border-l border-blue-900/50">
-                    <div class="text-right">
-                        <div class="text-sm font-bold text-white">Admin Kian</div>
-                        <div class="text-xs text-blue-400">System Administrator</div>
+                
+                <div class="relative group h-full flex items-center pl-6 border-l border-blue-900/50">
+                    <div class="flex items-center gap-3 cursor-pointer">
+                        <div class="text-right">
+                            <div class="text-sm font-bold text-white">Admin Kian</div>
+                            <div class="text-xs text-blue-400">System Administrator</div>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-slate-700 border border-blue-500 overflow-hidden shadow-[0_0_10px_rgba(37,99,235,0.4)]">
+                            <img src="https://api.dicebear.com/7.x/initials/svg?seed=Kian&backgroundColor=020617&textColor=38bdf8" alt="Profile">
+                        </div>
                     </div>
-                    <div class="w-10 h-10 rounded-full bg-slate-700 border border-blue-500 overflow-hidden shadow-[0_0_10px_rgba(37,99,235,0.4)]">
-                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Kian&backgroundColor=020617&textColor=38bdf8" alt="Profile">
+
+                    <div class="absolute right-0 top-full h-4 w-48 bg-transparent z-[90]"></div>
+
+                    <div class="absolute right-0 top-[calc(100%+0.5rem)] w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100]">
+                        <div class="bg-[#0f172a] border border-blue-900/50 rounded-xl shadow-2xl p-2">
+                            <a href="#" class="flex items-center gap-2 px-3 py-2 text-sm text-slate-300 hover:bg-blue-900/30 hover:text-blue-400 rounded-lg transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                System Settings
+                            </a>
+                            <div class="border-t border-blue-900/50 my-1"></div>
+                            <a href="/login" class="flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-900/30 hover:text-red-300 rounded-lg transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                Log Out
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
-
         <main class="flex-1 overflow-y-auto p-8 relative">
             <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
             

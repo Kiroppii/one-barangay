@@ -17,9 +17,9 @@
 </head>
 <body class="min-h-screen font-sans antialiased">
 
-    <nav class="border-b border-blue-900/50 bg-[#020617]/90 backdrop-blur-md sticky top-0 z-50">
+    <nav class="border-b border-blue-900/50 bg-[#020617]/90 backdrop-blur-md sticky top-0 z-[60]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between py-3">
+            <div class="flex items-center justify-between h-16">
                 
                 <div class="flex flex-col">
                     <span class="font-bold text-2xl tracking-wider text-blue-400 glow-text leading-tight">ONE BARANGAY</span>
@@ -30,12 +30,31 @@
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4">
-                    <span class="text-sm text-slate-400">Welcome, Kian</span>
-                    <div class="w-8 h-8 rounded-full bg-slate-700 border border-blue-500 overflow-hidden">
-                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Kian&backgroundColor=020617&textColor=38bdf8" alt="Profile">
+                <div class="relative group h-full flex items-center">
+                    <div class="flex items-center gap-4 cursor-pointer">
+                        <span class="text-sm text-slate-400">Welcome, Kian</span>
+                        <div class="w-8 h-8 rounded-full bg-slate-700 border border-blue-500 overflow-hidden shadow-[0_0_10px_rgba(37,99,235,0.4)]">
+                            <img src="https://api.dicebear.com/7.x/initials/svg?seed=Kian&backgroundColor=020617&textColor=38bdf8" alt="Profile">
+                        </div>
+                    </div>
+
+                    <div class="absolute right-0 top-full h-4 w-48 bg-transparent z-[90]"></div>
+
+                    <div class="absolute right-0 top-[calc(100%+0.5rem)] w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100]">
+                        <div class="bg-[#0f172a] border border-blue-900/50 rounded-xl shadow-2xl p-2">
+                            <a href="#" class="flex items-center gap-2 px-3 py-2 text-sm text-slate-300 hover:bg-blue-900/30 hover:text-blue-400 rounded-lg transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                My Profile
+                            </a>
+                            <div class="border-t border-blue-900/50 my-1"></div>
+                            <a href="/login" class="flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-red-900/30 hover:text-red-300 rounded-lg transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                Log Out
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </nav>
