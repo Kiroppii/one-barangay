@@ -34,33 +34,33 @@
                 <p class="text-slate-400 text-sm mt-1">Enter your credentials to access the portal.</p>
             </div>
 
-            <form action="#" class="space-y-5">
+            <form method="POST" action="/login" class="space-y-5">
+                @csrf @if($errors->any())
+                    <div class="bg-red-500/10 border border-red-500/50 text-red-400 px-4 py-2 rounded-lg text-sm mb-4">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Email Address</label>
                     <div class="relative">
                         <svg class="w-5 h-5 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
-                        <input type="email" placeholder="name@example.com" class="w-full input-bg rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
+                        <input type="email" name="email" value="{{ old('email') }}" placeholder="name@example.com" class="w-full input-bg rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
                     </div>
                 </div>
 
                 <div>
                     <div class="flex justify-between items-center mb-1.5">
                         <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider">Password</label>
-                        <a href="#" class="text-xs text-blue-400 hover:text-blue-300 transition-colors">Forgot password?</a>
                     </div>
                     <div class="relative">
                         <svg class="w-5 h-5 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        <input type="password" placeholder="••••••••" class="w-full input-bg rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
+                        <input type="password" name="password" placeholder="••••••••" class="w-full input-bg rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-2 pt-1">
-                    <input type="checkbox" id="remember" class="w-4 h-4 rounded border-blue-900/50 bg-[#020617] text-blue-600 focus:ring-blue-500 focus:ring-offset-[#0f172a]">
-                    <label for="remember" class="text-sm text-slate-400 cursor-pointer">Remember me for 30 days</label>
-                </div>
-
                 <div class="pt-4">
-                    <button type="button" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg px-4 py-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all flex justify-center items-center gap-2 group">
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg px-4 py-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all flex justify-center items-center gap-2 group">
                         Sign In
                         <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </button>
