@@ -50,19 +50,38 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">First Name</label>
-                        <input type="text" name="first_name" placeholder="Juan" class="w-full input-bg rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
+                        <input type="text" name="first_name" value="{{ old('first_name') }}" placeholder="Juan" class="w-full input-bg rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Last Name</label>
-                        <input type="text" name="last_name" placeholder="Dela Cruz" class="w-full input-bg rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
+                        <input type="text" name="last_name" value="{{ old('last_name') }}" placeholder="Dela Cruz" class="w-full input-bg rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
                     </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Contact Number</label>
+                        <div class="relative">
+                            <svg class="w-5 h-5 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l2 5-2 5H3m16-10h-2l-2 5 2 5h2m-4-10h-4v10h4V5z"></path></svg>
+                            <input type="tel" name="contact_number" value="{{ old('contact_number') }}" placeholder="09171234567" pattern="\d{11}" maxlength="11" class="w-full input-bg rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Birthday</label>
+                        <input type="date" name="birthday" value="{{ old('birthday') }}" class="w-full input-bg rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Address</label>
+                    <input type="text" name="address" value="{{ old('address') }}" placeholder="123 Barangay St., City" class="w-full input-bg rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
                 </div>
 
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Email Address</label>
                     <div class="relative">
                         <svg class="w-5 h-5 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        <input type="email" name="email" placeholder="name@example.com" class="w-full input-bg rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
+                        <input type="email" name="email" value="{{ old('email') }}" placeholder="name@example.com" class="w-full input-bg rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" required>
                     </div>
                 </div>
 
