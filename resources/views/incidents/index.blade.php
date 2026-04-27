@@ -13,6 +13,12 @@
     </a>
 </div>
 
+@if(session('success'))
+    <div class="bg-emerald-500/10 border border-emerald-500/50 text-emerald-400 px-4 py-3 rounded-lg text-sm mb-6">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="card-bg rounded-2xl shadow-2xl overflow-hidden">
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
@@ -25,26 +31,34 @@
                 </tr>
             </thead>
             <tbody class="text-sm divide-y divide-blue-900/30">
-                <tr class="table-row-hover transition-colors">
-                    <td class="p-4 font-medium text-blue-300">Fallen Tree / Debris</td>
-                    <td class="p-4 text-slate-300">Purok 4, Main Street</td>
-                    <td class="p-4 text-slate-400">Apr 21, 2026</td>
-                    <td class="p-4">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Resolved
-                        </span>
-                    </td>
-                </tr>
-                <tr class="table-row-hover transition-colors">
-                    <td class="p-4 font-medium text-blue-300">Noise Complaint</td>
-                    <td class="p-4 text-slate-300">Purok 2, Near Basketball Court</td>
-                    <td class="p-4 text-slate-400">Apr 23, 2026</td>
-                    <td class="p-4">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> Under Investigation
-                        </span>
-                    </td>
-                </tr>
+                @forelse($incidents as $incident)
+                    <tr class="table-row-hover transition-colors">
+                        <td class="p-4 font-medium text-blue-300">{{ $incident->incident_type }}</td>
+                        <td class="p-4 text-slate-300">{{ $incident->location }}</td>
+                        <td class="p-4 text-slate-400">{{ $incident->created_at->format('M d, Y') }}</td>
+                        <td class="p-4">
+                            @if($incident->status === 'Resolved')
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Resolved
+                                </span>
+                            @elseif($incident->status === 'Under Investigation')
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span> Under Investigation
+                                </span>
+                            @else
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> {{ $incident->status }}
+                                </span>
+                            @endif
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="p-8 text-center text-slate-400">
+                            You haven't reported any incidents yet.
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

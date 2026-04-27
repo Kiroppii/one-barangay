@@ -10,7 +10,11 @@ class IncidentReport extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'incident_type', 'description', 'location', 'status'
+        'user_id', 
+        'incident_type', 
+        'description', 
+        'location', 
+        'status'
     ];
 
     public function user()
