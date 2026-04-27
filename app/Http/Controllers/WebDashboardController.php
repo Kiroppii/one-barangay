@@ -10,6 +10,10 @@ class WebDashboardController extends Controller
 {
    public function index()
     {
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
         $userId = Auth::id();
 
         $totalRequests = CertificateRequest::where('user_id', $userId)->count();

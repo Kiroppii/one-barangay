@@ -34,8 +34,10 @@
                 <p class="text-slate-400 text-sm mt-1">Enter your credentials to access the portal.</p>
             </div>
 
-            <form method="POST" action="/login" class="space-y-5">
-                @csrf @if($errors->any())
+            <form method="POST" action="{{ route('login') }}" class="space-y-5">
+                @csrf
+
+                @if($errors->any())
                     <div class="bg-red-500/10 border border-red-500/50 text-red-400 px-4 py-2 rounded-lg text-sm mb-4">
                         {{ $errors->first() }}
                     </div>

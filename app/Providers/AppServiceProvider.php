@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        RedirectIfAuthenticated::redirectUsing(function ($request) {
+            if (Auth::check()) {
+                return Auth::user()->role === 'admin'
+                    ? route('admin.dashboard')
+                    : route('dashboard');
+            }
+
+            return '/';
+        });
     }
 }

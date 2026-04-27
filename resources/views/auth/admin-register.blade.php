@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Portal Registration</title>
-    @vite('resources/css/app.css')
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #020617; color: #e2e8f0; }
+        .card-bg { background-color: #0f172a; border: 1px solid #1e3a8a; backdrop-filter: blur(10px); }
+        .input-bg { background-color: #020617; border: 1px solid #1e3a8a; }
+    </style>
 </head>
 <body class="bg-[#020617] text-white font-sans antialiased min-h-screen flex items-center justify-center relative overflow-hidden">
     
@@ -21,7 +26,7 @@
             <p class="text-slate-400 text-sm mt-2">Authorized System Administrators Only</p>
         </div>
 
-        <form method="POST" action="/admin/register" class="space-y-4">
+        <form method="POST" action="{{ route('admin.register.store') }}" class="space-y-4">
             @csrf
 
             <div class="grid grid-cols-2 gap-4">

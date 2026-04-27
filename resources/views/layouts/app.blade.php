@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - One Barangay</title>
-    @vite('resources/css/app.css')
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .card-bg { background: linear-gradient(145deg, rgba(2,6,23,0.9) 0%, rgba(15,23,42,0.9) 100%); }
     </style>
