@@ -34,7 +34,7 @@
                 <p class="text-slate-400 text-sm mt-1">Register for a resident portal account to request documents and report issues online.</p>
             </div>
 
-            <form method="POST" action="/register" class="space-y-6">
+            <form method="POST" action="{{ route('register') }}" class="space-y-6">
                 @csrf
 
                 @if($errors->any())

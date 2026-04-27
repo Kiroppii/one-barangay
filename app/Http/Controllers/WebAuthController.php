@@ -87,13 +87,12 @@ class WebAuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            
-            // STRICT ROLE CHECK: Routes Admins and Residents correctly
-            if (Auth::user()->role === 'admin') {
-                return redirect('/admin/dashboard');
-            }
-            
-            return redirect('/dashboard');
+
+            $redirectPath = Auth::user()->role === 'admin'
+                ? route('admin.dashboard')
+                : route('dashboard');
+
+            return redirect()->intended($redirectPath);
         }
 
         return back()->withErrors([
