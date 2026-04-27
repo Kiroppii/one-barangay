@@ -10,6 +10,7 @@ use App\Http\Controllers\WebEventController;
 use App\Http\Controllers\WebIncidentController;
 use App\Http\Controllers\Admin\AdminIncidentController; // <-- Imported here!
 
+use App\Http\Controllers\Admin\AdminResidentController;
 // ==========================================
 // 1. PUBLIC ROUTES (Anyone can access)
 // ==========================================
@@ -98,10 +99,7 @@ Route::middleware(['auth', 'no-back-history'])->group(function () {
     Route::get('/admin/events', function () {
         return view('admin.events.index');
     });
-    Route::get('/admin/residents', function () {
-        return view('admin.residents.index');
-    });
-    Route::get('/admin/residents/create', function () {
-        return view('admin.residents.create');
-    });
+    Route::get('/admin/residents', [AdminResidentController::class, 'index']);
+    Route::get('/admin/residents/create', [AdminResidentController::class, 'create']);
+    Route::post('/admin/residents', [AdminResidentController::class, 'store']);
 });
