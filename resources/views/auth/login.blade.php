@@ -60,19 +60,19 @@
                 </div>
 
                 <div class="pt-4">
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg px-4 py-3 shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all flex justify-center items-center gap-2 group">
-                        Sign In
-                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </button>
-                </div>
-            </form>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg mt-6 shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all">
+                Sign In &rarr;
+            </button>
+        </form> <div class="mt-6 text-center text-sm text-slate-400">
+            Don't have a resident account? <a href="/register" class="text-blue-500 hover:text-blue-400 font-bold transition-colors">Register here</a>
+        </div>
 
-            <div class="mt-8 text-center border-t border-blue-900/50 pt-6">
-                <p class="text-sm text-slate-400">
-                    Don't have a resident account? 
-                    <a href="/register" class="text-blue-400 font-semibold hover:text-blue-300 transition-colors">Register here</a>
-                </p>
-            </div>
+        <div class="text-center mt-6 pt-4 border-t border-blue-900/50">
+            <a href="/admin/register" class="text-xs text-slate-500 hover:text-blue-400 transition-colors flex items-center justify-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                Authorized Personnel? <span class="font-bold border-b border-transparent hover:border-blue-400">Register as Admin</span>
+            </a>
+        </div>
         </div>
 
         <div class="text-center mt-8 text-xs text-slate-600">

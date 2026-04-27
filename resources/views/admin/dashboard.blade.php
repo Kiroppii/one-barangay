@@ -1,98 +1,82 @@
 @extends('layouts.admin')
 
-@section('title', 'Command Center')
+@section('title', 'Admin Dashboard')
 
 @section('content')
-<div class="mb-8">
-    <h2 class="text-2xl font-bold text-white tracking-tight">System Overview</h2>
-    <p class="text-slate-400 text-sm">Real-time statistics for the barangay integration platform.</p>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-    <div class="card-bg rounded-xl p-6 border-t-2 border-t-blue-500 hover:-translate-y-1 transition-transform shadow-lg">
-        <div class="text-slate-400 text-sm font-medium mb-1">Total Residents</div>
-        <div class="text-3xl font-bold text-white">1,248 <span class="text-emerald-400 text-sm font-normal ml-2">↑ 12</span></div>
+<div class="mb-8 flex justify-between items-end">
+    <div>
+        <h1 class="text-3xl font-bold text-white mb-2 tracking-tight">Barangay Command Center</h1>
+        <p class="text-slate-400">System overview and recent activities.</p>
     </div>
-    <div class="card-bg rounded-xl p-6 border-t-2 border-t-amber-500 hover:-translate-y-1 transition-transform shadow-lg">
-        <div class="text-slate-400 text-sm font-medium mb-1">Pending Certificates</div>
-        <div class="text-3xl font-bold text-amber-400">12 <span class="text-slate-500 text-sm font-normal ml-2">Action Req.</span></div>
-    </div>
-    <div class="card-bg rounded-xl p-6 border-t-2 border-t-red-500 hover:-translate-y-1 transition-transform shadow-lg">
-        <div class="text-slate-400 text-sm font-medium mb-1">Active Blotters</div>
-        <div class="text-3xl font-bold text-red-400">3 <span class="text-slate-500 text-sm font-normal ml-2">Reviewing</span></div>
-    </div>
-    <div class="card-bg rounded-xl p-6 border-t-2 border-t-emerald-500 hover:-translate-y-1 transition-transform shadow-lg">
-        <div class="text-slate-400 text-sm font-medium mb-1">Upcoming Events</div>
-        <div class="text-3xl font-bold text-emerald-400">2 <span class="text-slate-500 text-sm font-normal ml-2">Scheduled</span></div>
+    <div class="text-right">
+        <p class="text-sm font-medium text-blue-400">{{ now()->format('l, F j, Y') }}</p>
     </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-    
-    <div class="lg:col-span-2 card-bg rounded-xl shadow-xl overflow-hidden flex flex-col">
-        <div class="p-6 border-b border-blue-900/50 flex justify-between items-center">
-            <h3 class="font-bold text-white text-lg">Action Required: Pending Certificates</h3>
-            <a href="/certificates" class="text-sm text-blue-400 hover:text-blue-300">View All &rarr;</a>
-        </div>
-        <div class="overflow-x-auto flex-1">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-[#020617]/50 text-xs uppercase tracking-wider text-slate-400">
-                        <th class="p-4 font-medium">Resident</th>
-                        <th class="p-4 font-medium">Document Type</th>
-                        <th class="p-4 font-medium">Date Filed</th>
-                        <th class="p-4 font-medium text-right">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="text-sm divide-y divide-blue-900/30">
-                    <tr class="hover:bg-blue-900/10 transition-colors">
-                        <td class="p-4 font-medium text-white">Maria Santos</td>
-                        <td class="p-4 text-slate-300">Barangay Clearance</td>
-                        <td class="p-4 text-slate-400">2 hrs ago</td>
-                        <td class="p-4 text-right">
-                            <button class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-xs font-medium transition-colors">Approve</button>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-blue-900/10 transition-colors">
-                        <td class="p-4 font-medium text-white">Juan Dela Cruz</td>
-                        <td class="p-4 text-slate-300">Business Permit</td>
-                        <td class="p-4 text-slate-400">5 hrs ago</td>
-                        <td class="p-4 text-right">
-                            <button class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded text-xs font-medium transition-colors">Approve</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="card-bg rounded-2xl p-6 border border-amber-900/50 shadow-[0_0_20px_rgba(245,158,11,0.1)] relative overflow-hidden group">
+        <div class="absolute -right-6 -top-6 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
+        <h3 class="text-slate-400 text-sm font-medium uppercase tracking-wider mb-1">Action Required</h3>
+        <p class="text-4xl font-bold text-amber-400 mb-2">{{ $pendingRequests }}</p>
+        <p class="text-xs text-slate-500">Pending certificate requests</p>
     </div>
 
-    <div class="card-bg rounded-xl shadow-xl overflow-hidden">
-        <div class="p-6 border-b border-blue-900/50">
-            <h3 class="font-bold text-white text-lg">System Activity</h3>
-        </div>
-        <div class="p-6 space-y-6">
-            <div class="flex gap-4">
-                <div class="w-2 h-2 mt-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></div>
-                <div>
-                    <p class="text-sm text-slate-200"><span class="font-bold text-white">Jehd</span> approved a Barangay Clearance.</p>
-                    <p class="text-xs text-slate-500 mt-1">10 mins ago via Workflow</p>
-                </div>
-            </div>
-            <div class="flex gap-4">
-                <div class="w-2 h-2 mt-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
-                <div>
-                    <p class="text-sm text-slate-200"><span class="font-bold text-white">James</span> updated an Incident Report.</p>
-                    <p class="text-xs text-slate-500 mt-1">45 mins ago</p>
-                </div>
-            </div>
-            <div class="flex gap-4">
-                <div class="w-2 h-2 mt-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]"></div>
-                <div>
-                    <p class="text-sm text-slate-200"><span class="font-bold text-white">Igor</span> registered 5 new residents.</p>
-                    <p class="text-xs text-slate-500 mt-1">2 hours ago</p>
-                </div>
-            </div>
-        </div>
+    <div class="card-bg rounded-2xl p-6 border border-emerald-900/30 shadow-[0_0_20px_rgba(16,185,129,0.05)] relative overflow-hidden group">
+        <div class="absolute -right-6 -top-6 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+        <h3 class="text-slate-400 text-sm font-medium uppercase tracking-wider mb-1">Total Issued</h3>
+        <p class="text-4xl font-bold text-emerald-400 mb-2">{{ $approvedRequests }}</p>
+        <p class="text-xs text-slate-500">Approved documents</p>
+    </div>
+
+    <div class="card-bg rounded-2xl p-6 border border-blue-900/30 shadow-[0_0_20px_rgba(30,58,138,0.05)] relative overflow-hidden group">
+        <div class="absolute -right-6 -top-6 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all"></div>
+        <h3 class="text-slate-400 text-sm font-medium uppercase tracking-wider mb-1">Registered Users</h3>
+        <p class="text-4xl font-bold text-white mb-2">{{ $totalResidents }}</p>
+        <p class="text-xs text-slate-500">Active resident accounts</p>
+    </div>
+</div>
+
+<div class="card-bg rounded-2xl shadow-[0_0_30px_rgba(30,58,138,0.15)] border border-blue-900/50 overflow-hidden">
+    <div class="p-6 border-b border-blue-900/50 flex justify-between items-center bg-[#020617]/50">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Live Request Feed
+        </h2>
+        <a href="/admin/certificates" class="text-sm text-blue-400 hover:text-blue-300 font-medium transition-colors border border-blue-900/50 px-3 py-1.5 rounded-lg hover:bg-blue-900/20">Manage All</a>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <tbody class="text-sm divide-y divide-blue-900/30">
+                @forelse($recentRequests as $req)
+                    <tr class="hover:bg-blue-900/10 transition-colors">
+                        <td class="p-4">
+                            <div class="flex items-center gap-3">
+                                <img src="https://api.dicebear.com/7.x/initials/svg?seed={{ $req->user->name }}&backgroundColor=1e3a8a&textColor=fff" class="w-8 h-8 rounded-full border border-blue-800">
+                                <div>
+                                    <p class="text-white font-medium">{{ $req->user->name }}</p>
+                                    <p class="text-xs text-slate-500">{{ $req->created_at->diffForHumans() }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-4 text-blue-300 font-medium">{{ $req->certificate_type }}</td>
+                        <td class="p-4 text-slate-400">{{ Str::limit($req->purpose, 30) }}</td>
+                        <td class="p-4 text-right">
+                            @if($req->status === 'Pending')
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20">Pending</span>
+                            @elseif($req->status === 'Approved')
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Approved</span>
+                            @else
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-red-500/10 text-red-400 border border-red-500/20">Rejected</span>
+                            @endif
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="p-8 text-center text-slate-500 font-medium">No activity in the system yet.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 </div>
 @endsection

@@ -2,33 +2,98 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class WebAuthController extends Controller
 {
-    // Handle the Universal Login
+    // ==========================================
+    // 1. RESIDENT AUTHENTICATION
+    // ==========================================
+
+    public function showLoginForm()
+    {
+        // Make sure your view is at resources/views/auth/login.blade.php
+        return view('auth.login');
+    }
+
+    public function showRegisterForm()
+    {
+        // Make sure your view is at resources/views/auth/register.blade.php
+        return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'email'      => 'required|email|unique:users,email',
+            'password'   => 'required|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'name'     => $request->first_name . ' ' . $request->last_name,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
+            'role'     => 'resident', // Standard user role
+        ]);
+
+        Auth::login($user);
+        return redirect('/dashboard');
+    }
+
+    // ==========================================
+    // 2. ADMIN REGISTRATION PORTAL
+    // ==========================================
+
+    public function showAdminRegisterForm()
+    {
+        return view('auth.admin-register');
+    }
+
+    public function registerAdmin(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'email'      => 'required|email|unique:users,email',
+            'password'   => 'required|min:8|confirmed',
+        ]);
+
+        $admin = User::create([
+            'name'     => $request->first_name . ' ' . $request->last_name,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
+            'role'     => 'admin', // Forces the account to be an Admin
+        ]);
+
+        Auth::login($admin);
+        return redirect('/admin/dashboard'); 
+    }
+
+    // ==========================================
+    // 3. CORE LOGIN & LOGOUT LOGIC
+    // ==========================================
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            $user = Auth::user();
-
-            // Universal Redirect based on Role
-            if ($user->role === 'admin') {
-                return redirect()->intended('/admin/dashboard');
+            
+            // STRICT ROLE CHECK: Routes Admins and Residents correctly
+            if (Auth::user()->role === 'admin') {
+                return redirect('/admin/dashboard');
             }
-
-            // Default resident redirect
-            return redirect()->intended('/certificates');
+            
+            return redirect('/dashboard');
         }
 
         return back()->withErrors([
@@ -36,41 +101,12 @@ class WebAuthController extends Controller
         ])->onlyInput('email');
     }
 
-    // Handle Resident Registration
-    public function register(Request $request)
-    {
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
-            'email'      => 'required|email|unique:users,email',
-            'password'   => 'required|min:8|confirmed', // Must be 8 chars AND match password_confirmation
-        ], [
-            // Custom Error Messages to make it look professional
-            'password.min' => 'For security, your password must be at least 8 characters long.',
-            'email.unique' => 'This email is already registered in the barangay portal.',
-        ]);
-
-        // 2. Save to Database
-        $user = User::create([
-            'name'     => $request->first_name . ' ' . $request->last_name,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password),
-            'role'     => 'resident', 
-        ]);
-
-        // 3. Log them in and redirect
-        Auth::login($user);
-
-        return redirect('/certificates');
-    }
-
-    // Handle Logout
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
+        
         return redirect('/login');
     }
 }
