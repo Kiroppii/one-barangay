@@ -29,20 +29,31 @@
         <form method="POST" action="{{ route('admin.register.store') }}" class="space-y-4">
             @csrf
 
+            @if ($errors->any())
+                <div class="bg-red-500/10 border border-red-500/30 text-red-200 px-4 py-3 rounded-lg">
+                    <p class="font-semibold mb-2">Please fix the following errors:</p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">First Name</label>
-                    <input type="text" name="first_name" required class="w-full bg-[#020617] border border-blue-900/50 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 transition-colors">
+                    <input type="text" name="first_name" value="{{ old('first_name') }}" required class="w-full bg-[#020617] border border-blue-900/50 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 transition-colors">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Last Name</label>
-                    <input type="text" name="last_name" required class="w-full bg-[#020617] border border-blue-900/50 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 transition-colors">
+                    <input type="text" name="last_name" value="{{ old('last_name') }}" required class="w-full bg-[#020617] border border-blue-900/50 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 transition-colors">
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Official Email</label>
-                <input type="email" name="email" required class="w-full bg-[#020617] border border-blue-900/50 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 transition-colors">
+                <input type="email" name="email" value="{{ old('email') }}" required class="w-full bg-[#020617] border border-blue-900/50 text-white rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 transition-colors">
             </div>
 
             <div>
