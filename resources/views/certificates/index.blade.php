@@ -3,7 +3,7 @@
 @section('title', 'My Certificates')
 
 @section('content')
-<div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+<div class="py-8 px-4 sm:px-6 lg:px-8">
     
     @if(session('success'))
         <div class="mb-6 bg-emerald-500/10 border border-emerald-500/50 text-emerald-400 px-4 py-3 rounded-lg flex items-center gap-3 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
@@ -19,15 +19,14 @@
         </div>
     @endif
     <div class="flex justify-between items-end mb-8">
-    <div>
-        <h1 class="text-3xl font-bold text-white mb-2">My Requests</h1>
-        <p class="text-slate-400">Track the status of your barangay documents.</p>
+        <div>
+            <h1 class="text-3xl font-bold text-white mb-2">My Requests</h1>
+            <p class="text-slate-400">Track the status of your barangay documents.</p>
+        </div>
+        <a href="/certificates/create" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-[0_0_10px_rgba(37,99,235,0.4)]">
+            + New Request
+        </a>
     </div>
-    <a href="/certificates/create" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-[0_0_10px_rgba(37,99,235,0.4)]">
-        + New Request
-    </a>
-</div>
-</div>
 
 <div class="card-bg rounded-2xl shadow-2xl overflow-hidden">
     <div class="overflow-x-auto">

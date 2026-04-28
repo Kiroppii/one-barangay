@@ -9,24 +9,32 @@
         <p class="text-slate-400">Review, investigate, and resolve resident blotters and hazard reports.</p>
     </div>
     
-    <form method="GET" action="/admin/incidents" class="flex gap-3">
-        <div class="relative">
-            <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by type or location..." class="bg-[#020617] border border-blue-900/50 text-slate-300 text-sm rounded-lg pl-9 pr-4 py-2 focus:outline-none focus:border-red-500 transition-colors w-64">
+    <div class="flex gap-3 items-center">
+        <div class="relative flex-1">
+            <form method="GET" action="/admin/incidents" class="flex gap-3 items-center">
+                <div class="relative flex-1">
+                    <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by type or location..." class="bg-[#020617] border border-blue-900/50 text-slate-300 text-sm rounded-lg pl-9 pr-4 py-2 focus:outline-none focus:border-red-500 transition-colors w-64">
+                </div>
+                
+                <select name="status" onchange="this.form.submit()" class="bg-[#020617] border border-blue-900/50 text-slate-300 text-sm rounded-lg px-4 py-2 focus:outline-none focus:border-red-500 transition-colors cursor-pointer">
+                    <option value="All Statuses" {{ request('status') == 'All Statuses' ? 'selected' : '' }}>All Incidents</option>
+                    <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending Review</option>
+                    <option value="Under Investigation" {{ request('status') == 'Under Investigation' ? 'selected' : '' }}>Under Investigation</option>
+                    <option value="Resolved" {{ request('status') == 'Resolved' ? 'selected' : '' }}>Resolved</option>
+                </select>
+            </form>
         </div>
         
-        <select name="status" onchange="this.form.submit()" class="bg-[#020617] border border-blue-900/50 text-slate-300 text-sm rounded-lg px-4 py-2 focus:outline-none focus:border-red-500 transition-colors cursor-pointer">
-            <option value="All Statuses" {{ request('status') == 'All Statuses' ? 'selected' : '' }}>All Incidents</option>
-            <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending Review</option>
-            <option value="Under Investigation" {{ request('status') == 'Under Investigation' ? 'selected' : '' }}>Under Investigation</option>
-            <option value="Resolved" {{ request('status') == 'Resolved' ? 'selected' : '' }}>Resolved</option>
-        </select>
-        
-        <button type="submit" name="export" value="1" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-[0_0_10px_rgba(220,38,38,0.3)] flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            Export Log
-        </button>
-    </form>
+        <form method="GET" action="/admin/incidents" class="flex gap-3">
+            <input type="hidden" name="search" value="{{ request('search') }}">
+            <input type="hidden" name="status" value="{{ request('status') }}">
+            <button type="submit" name="export" value="1" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-[0_0_10px_rgba(220,38,38,0.3)] flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                Export Log
+            </button>
+        </form>
+    </div>
 </div>
 
 @if(session('success'))

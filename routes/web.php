@@ -8,8 +8,8 @@ use App\Http\Controllers\WebDashboardController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\WebEventController;
 use App\Http\Controllers\WebIncidentController;
-use App\Http\Controllers\Admin\AdminIncidentController; // <-- Imported here!
-
+use App\Http\Controllers\Admin\AdminIncidentController;
+use App\Http\Controllers\Admin\AdminEventController;
 use App\Http\Controllers\Admin\AdminResidentController;
 // ==========================================
 // 1. PUBLIC ROUTES (Anyone can access)
@@ -95,10 +95,12 @@ Route::middleware(['auth', 'no-back-history'])->group(function () {
     Route::post('/admin/incidents/{id}/investigate', [AdminIncidentController::class, 'investigate']);
     Route::post('/admin/incidents/{id}/resolve', [AdminIncidentController::class, 'resolve']);
 
-    // Admin UI Views (Placeholders until controllers are made)
-    Route::get('/admin/events', function () {
-        return view('admin.events.index');
-    });
+    // Admin Events
+     Route::get('/admin/events', [AdminEventController::class, 'index']);
+     Route::get('/admin/events/{id}', [AdminEventController::class, 'show'])->name('admin.events.show');
+     Route::post('/admin/events', [AdminEventController::class, 'store']);
+    Route::post('/admin/events/register', [AdminEventController::class, 'registerResident']);
+    Route::get('/admin/residents/search', [AdminEventController::class, 'searchResidents']);
     Route::get('/admin/residents', [AdminResidentController::class, 'index']);
     Route::get('/admin/residents/create', [AdminResidentController::class, 'create']);
     Route::post('/admin/residents', [AdminResidentController::class, 'store']);

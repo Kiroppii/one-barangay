@@ -9,27 +9,30 @@
         <p class="text-slate-400">Review, approve, and manage resident document requests.</p>
     </div>
     
-   <form method="GET" action="/admin/certificates" class="flex gap-3">
-        
-        <button type="submit" class="hidden" aria-hidden="true"></button>
-        
+   <div class="flex gap-3 items-center">
         <div class="relative">
-            <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search Resident or Type..." class="bg-[#020617] border border-blue-900/50 text-slate-300 text-sm rounded-lg pl-9 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors w-56">
+            <form method="GET" action="/admin/certificates" class="flex gap-3 items-center">
+                <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search Resident or Type..." class="bg-[#020617] border border-blue-900/50 text-slate-300 text-sm rounded-lg pl-9 pr-4 py-2 focus:outline-none focus:border-blue-500 transition-colors w-56">
+        
+                <select name="status" onchange="this.form.submit()" class="bg-[#020617] border border-blue-900/50 text-slate-300 text-sm rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors cursor-pointer">
+                    <option value="All Statuses" {{ request('status') == 'All Statuses' ? 'selected' : '' }}>All Statuses</option>
+                    <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending Only</option>
+                    <option value="Approved" {{ request('status') == 'Approved' ? 'selected' : '' }}>Approved</option>
+                    <option value="Rejected" {{ request('status') == 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                </select>
+            </form>
         </div>
 
-        <select name="status" onchange="this.form.submit()" class="bg-[#020617] border border-blue-900/50 text-slate-300 text-sm rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 transition-colors cursor-pointer">
-            <option value="All Statuses" {{ request('status') == 'All Statuses' ? 'selected' : '' }}>All Statuses</option>
-            <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending Only</option>
-            <option value="Approved" {{ request('status') == 'Approved' ? 'selected' : '' }}>Approved</option>
-            <option value="Rejected" {{ request('status') == 'Rejected' ? 'selected' : '' }}>Rejected</option>
-        </select>
-
-        <button type="submit" name="export" value="true" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-[0_0_10px_rgba(37,99,235,0.4)] flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            Export
-        </button>
-    </form>
+        <form method="GET" action="/admin/certificates" class="flex gap-3">
+            <input type="hidden" name="search" value="{{ request('search') }}">
+            <input type="hidden" name="status" value="{{ request('status') }}">
+            <button type="submit" name="export" value="true" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-[0_0_10px_rgba(37,99,235,0.4)] flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                Export
+            </button>
+        </form>
+    </div>
 </div>
 
 <div class="card-bg rounded-2xl shadow-2xl overflow-hidden">

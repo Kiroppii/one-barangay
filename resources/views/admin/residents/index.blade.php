@@ -1,4 +1,6 @@
-@extends('layouts.app') @section('title', 'Resident Management')
+@extends('layouts.admin')
+
+@section('title', 'Resident Management')
 
 @section('content')
 <div class="mb-8 flex justify-between items-center">
